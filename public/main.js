@@ -24,11 +24,11 @@ formUser1.addEventListener("submit", function(event) {
   const message = inputUser1.value;
 
   if (editingMessage == null) {
-    const data = { message: message, user: 'user1', time: getTime() }
+    const data = { message: message, user: 'user1', time: getTime() };
 
     messages.push(data)
-    addMessagesUser(data, messages.length - 1, areaMessagesUser1, "user1")
-    addMessagesUser(data, messages.length - 1, areaMessagesUser2, "user2")
+    addMessagesUser(data, messages.length - 1, areaMessagesUser1, "user1");
+    addMessagesUser(data, messages.length - 1, areaMessagesUser2, "user2");
   } else {
     const spanUser1 = areaMessagesUser1.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
     spanUser1.innerText = message;
@@ -47,11 +47,11 @@ formUser2.addEventListener("submit", function(event) {
   const message = inputUser2.value;
 
   if (editingMessage == null) {
-    const data = { message: message, user: 'user2', time: getTime() }
+    const data = { message: message, user: 'user2', time: getTime() };
 
-    messages.push(data)
-    addMessagesUser(data, messages.length - 1, areaMessagesUser1, "user1")
-    addMessagesUser(data, messages.length - 1, areaMessagesUser2, "user2")
+    messages.push(data);
+    addMessagesUser(data, messages.length - 1, areaMessagesUser1, "user1");
+    addMessagesUser(data, messages.length - 1, areaMessagesUser2, "user2");
   } else {
     const spanUser1 = areaMessagesUser1.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
     spanUser1.innerText = message;
@@ -87,13 +87,13 @@ function addMessagesUser(data, index, area, user) {
 
   if (data.user == user) {
     newMessage.addEventListener("mouseenter", function() {
-      newMessage.insertAdjacentHTML("beforeend", newMessage.buttons)
+      newMessage.insertAdjacentHTML("beforeend", newMessage.buttons);
 
       const deleteButton = newMessage.querySelector(`button[name="delete"]`);
       const modifyButton = newMessage.querySelector(`button[name="modify"]`);
 
       deleteButton.addEventListener("click", () => deleteMessage(index));
-      modifyButton.addEventListener("click", modifyMessage.bind(null, user, index))
+      modifyButton.addEventListener("click", modifyMessage.bind(null, user, index));
 
     });
 
@@ -105,21 +105,20 @@ function addMessagesUser(data, index, area, user) {
 }
 
 function deleteMessage(value) {
-  areaMessagesUser1.removeChild(areaMessagesUser1.querySelector(`li[value="${value}"]`))
-  areaMessagesUser2.removeChild(areaMessagesUser2.querySelector(`li[value="${value}"]`))
+  areaMessagesUser1.removeChild(areaMessagesUser1.querySelector(`li[value="${value}"]`));
+  areaMessagesUser2.removeChild(areaMessagesUser2.querySelector(`li[value="${value}"]`));
 }
 
 function modifyMessage(user, value) {
-  editingMessage = value
-  const span1 = areaMessagesUser1.querySelector(`li[value="${value}"] span[class="chat-bubble"]`)
-  const span2 = areaMessagesUser2.querySelector(`li[value="${value}"] span[class="chat-bubble"]`)
+  editingMessage = value;
+  const span1 = areaMessagesUser1.querySelector(`li[value="${value}"] span[class="chat-bubble"]`);
+  const span2 = areaMessagesUser2.querySelector(`li[value="${value}"] span[class="chat-bubble"]`);
 
   if (user == "user1") {
-    inputUser1.value = span1.innerText
-    inputUser1.select()
+    inputUser1.value = span1.innerText;
+    inputUser1.select();
   } else {
-    inputUser2.value = span2.innerText
-    inputUser2.select()
+    inputUser2.value = span2.innerText;
+    inputUser2.select();
   }
 }
-// ATTENTION USER2 A FAIRE -> Passer User en params
