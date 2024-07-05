@@ -32,10 +32,9 @@ function handleMessage(user, otherUser) {
   user.form.addEventListener("submit", function(event) {
     event.preventDefault();
     const message = user.input.value;
+    const data = { message: message, user: user.name, time: getTime() };
 
     if (editingMessage == null) {
-      const data = { message: message, user: user.name, time: getTime() };
-
       messages.push(data);
       addMessagesUser(data, messages.length - 1, user);
       addMessagesUser(data, messages.length - 1, otherUser);
@@ -98,8 +97,8 @@ function deleteMessage(value) {
 
 function modifyMessage(name, value) {
   editingMessage = value;
-  const span1 = areaMessagesUser1.querySelector(`li[value="${value}"] span[class="chat-bubble"]`);
-  const span2 = areaMessagesUser2.querySelector(`li[value="${value}"] span[class="chat-bubble"]`);
+  const span1 = user1.area.querySelector(`li[value="${value}"] span[class="chat-bubble"]`);
+  const span2 = user2.area.querySelector(`li[value="${value}"] span[class="chat-bubble"]`);
 
   if (name == "user1") {
     inputUser1.value = span1.innerText;
