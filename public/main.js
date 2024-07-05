@@ -15,55 +15,43 @@ const user1 = {
   area: areaMessagesUser1
 };
 
+const user2 = {
+  name: "user2",
+  form: formUser2,
+  input: inputUser2,
+  area: areaMessagesUser2
+};
+
 let messages = [];
 let editingMessage = null;
 
-// listeners
-formUser1.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const message = inputUser1.value;
+formUser(user1, user2)
+formUser(user2, user1)
 
-  if (editingMessage == null) {
-    const data = { message: message, user: 'user1', time: getTime() };
+function formUser(user, otherUser) {
+  user.form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const message = user.input.value;
 
-    messages.push(data)
-    addMessagesUser(data, messages.length - 1, areaMessagesUser1, "user1");
-    addMessagesUser(data, messages.length - 1, areaMessagesUser2, "user2");
-  } else {
-    const spanUser1 = areaMessagesUser1.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
-    spanUser1.innerText = message;
+    if (editingMessage == null) {
+      const data = { message: message, user: user.name, time: getTime() };
 
-    const spanUser2 = areaMessagesUser2.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
-    spanUser2.innerText = message;
+      messages.push(data);
+      addMessagesUser(data, messages.length - 1, user.area, user.name);
+      addMessagesUser(data, messages.length - 1, otherUser.area, otherUser.name);
+    } else {
+      const spanUser1 = user.area.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
+      spanUser1.innerText = message;
 
-    editingMessage = null;
-  }
+      const spanUser2 = otherUser.area.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
+      spanUser2.innerText = message;
 
-  inputUser1.value = '';
-});
+      editingMessage = null;
+    }
 
-formUser2.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const message = inputUser2.value;
-
-  if (editingMessage == null) {
-    const data = { message: message, user: 'user2', time: getTime() };
-
-    messages.push(data);
-    addMessagesUser(data, messages.length - 1, areaMessagesUser1, "user1");
-    addMessagesUser(data, messages.length - 1, areaMessagesUser2, "user2");
-  } else {
-    const spanUser1 = areaMessagesUser1.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
-    spanUser1.innerText = message;
-
-    const spanUser2 = areaMessagesUser2.querySelector(`li[value="${editingMessage}"] span[class="chat-bubble"]`);
-    spanUser2.innerText = message;
-
-    editingMessage = null;
-  }
-
-  inputUser2.value = '';
-});
+    user.input.value = '';
+  });
+}
 
 // functions
 function getTime() {

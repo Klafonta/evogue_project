@@ -98,9 +98,10 @@ form {
   font-size: medium;
   background: transparent;
   position: relative;
-  bottom: -30px;
-  left: -50px;
+  bottom: 0px;
+  left: 0px;
   border: none;
+  cursor: pointer;
 }
 
 .self-message {
